@@ -2,101 +2,87 @@
 
 public class Spieler 
 {
-    int ubrigeWande;
+    int ubrigeWande = 10;
     Vec2 pos;
     Direction orientation;
 
     public Spieler(Direction side) 
     {
-        ubrigeWande = 10;
-        orientation = side;
-
-        if (orientation.left == 3) {
-            pos = new Vec2(0, 4);
-        }
-        else if (orientation.left == 4) {
-            pos = new Vec2(8, 4);
-        }
-        else {
-            System.out.println("Falsche Seite angegeben!");
-        }
+        this.orientation = side;
+        // Startposition direkt über die Logik der Seite bestimmen
+        this.pos = (side.left == 3) ? new Vec2(0, 4) : new Vec2(8, 4);
     }
     
     public void MoveTo(int dir)
     {
-        if (dir == 1 && Spielleiter.CanMoveTo(Vec2(pos.x, pos.y - 1), orientation))
-        {
-            pos.y -= 1;
-        }
-        else if (dir == 2 && Spielleiter.CanMoveTo(Vec2(pos.x, pos.y - 1), orientation))
-        {
-            pos.y += 1;
-        }
-        else if (dir == 3 && Spielleiter.CanMoveTo(Vec2(pos.x - 1, pos.y), orientation))
-        {
-            pos.x -= 1;
-        }
-        else if (dir == 4 && Spielleiter.CanMoveTo(Vec2(pos.x + 1, pos.y), orientation))
-        {
-            pos.x += 1;
+        // Richtungs-Vektor anhand der ID (1-4) bestimmen
+        Vec2 delta = getDirectionVector(dir);
+        if (delta == null) return;
+
+        Vec2 targetPos = new Vec2(pos.x + delta.x, pos.y + delta.y);
+
+        // Validierung und Bewegung
+        if (Spielleiter.CanMoveTo(targetPos, orientation)) {
+            pos = targetPos;
         }
     }
 
-    public void SetWall(Vec2 feld, int offset, int dir) 
+    public void SetWall(Vec2 feld, Vec2 offsetDir, Vec2 wallDir) 
     {
-        if ((offset == orientation.left || offset == orientation.right) && (dir == orientation.left || dir == Drection.right)) {
-            System.out.println("Falsche Seite angegeben. Felder können nicht blockiert werden");
-            return;
-        }
-        else if ((offset == orientation.up || offset == orientation.down) && (dir == orientation.up || dir == orientation.down)) {
-            System.out.println("Falsche Seite angegeben. Felder können nicht blockiert werden");
+        // 1. Validierung: Sind die Richtungen orthogonal (im 90-Grad-Winkel)?
+        if ((offsetDir.x != 0 && wallDir.x != 0) || (offsetDir.y != 0 && wallDir.y != 0)) {
+            System.out.println("Ungültige Wand-Konfiguration! Richtungen müssen orthogonal sein.");
             return;
         }
 
-        if (offset == orientation.up && dir == orientation.left) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.left);
-            Spielleiter.spielFeld[feld.x][feld.y - 1].BlockSide(orientation.left);
-            Spielleiter.spielFeld[feld.x - 1][feld.y].BlockSide(orientation.right);
-            Spielleiter.spielFeld[feld.x - 1][feld.y - 1].BlockSide(orientation.right);
+        // 2. Die 4 betroffenen Felder mathematisch über Vektoren berechnen
+        Vec2 f1 = feld;
+        Vec2 f2 = new Vec2(feld.x + offsetDir.x, feld.y + offsetDir.y);
+        Vec2 f3 = new Vec2(feld.x + wallDir.x, feld.y + wallDir.y);
+        Vec2 f4 = new Vec2(feld.x + offsetDir.x + wallDir.x, feld.y + offsetDir.y + wallDir.y);
+
+        // 3. Grenzen prüfen, um Abstürze (IndexOutOfBounds) zu verhindern
+        if (!isValid(f1) || !isValid(f2) || !isValid(f3) || !isValid(f4)) {
+            System.out.println("Wand außerhalb des Spielfelds!");
+            return;
         }
-        else if (offset == orientation.up && dir == orientation.right) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.right);
-            Spielleiter.spielFeld[feld.x][feld.y - 1].BlockSide(orientation.right);
-            Spielleiter.spielFeld[feld.x + 1][feld.y].BlockSide(orientation.left);
-            Spielleiter.spielFeld[feld.x + 1][feld.y - 1].BlockSide(orientationleft);
-        }
-        else if (offset == orientation.down && dir == orientation.left) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.left);
-            Spielleiter.spielFeld[feld.x][feld.y + 1].BlockSide(orientation.left);
-            Spielleiter.spielFeld[feld.x - 1][feld.y].BlockSide(orientation.right);
-            Spielleiter.spielFeld[feld.x - 1][feld.y + 1].BlockSide(orientation.right);
-        }
-        else if (offset == orientation.down && dir == orientation.right) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.right);
-            Spielleiter.spielFeld[feld.x][feld.y + 1].BlockSide(orientation.right);
-            Spielleiter.spielFeld[feld.x + 1][feld.y].BlockSide(orientation.left);
-            Spielleiter.spielFeld[feld.x + 1][feld.y + 1].BlockSide(orientation.left);
-        }
-        else if (offset == orientation.left && dir == orientation.up) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.up);
-            Spielleiter.spielFeld[feld.x - 1][feld.y].BlockSide(orientation.up);
-            Spielleiter.spielFeld[feld.x][feld.y - 1].BlockSide(orientation.down);
-            Spielleiter.spielFeld[feld.x - 1][feld.y - 1].BlockSide(orientation.down);
-        }
-        else if (offset == orientation.left && dir == orientation.down) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.down);
-            Spielleiter.spielFeld[feld.x - 1][feld.y].BlockSide(orientation.down);
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.up);
-            Spielleiter.spielFeld[feld.x - 1][feld.y].BlockSide(orientation.up);
-        }
-        else if (offset == orientation.right && dir == orientation.up) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.up);
-            Spielleiter.spielFeld[feld.x + 1][feld.y].BlockSide(orientation.up);
-        }
-        else if (offset == orientation.right && dir == orientation.down) {
-            Spielleiter.spielFeld[feld.x][feld.y].BlockSide(orientation.down);
-            Spielleiter.spielFeld[feld.x + 1][feld.y].BlockSide(orientation.down);
-        }
+
+        // 4. Die Blockade sauber setzen (Nutzt die Gegenrichtung für das Nachbarfeld)
+        blockWallsBetween(f1, f3);
+        blockWallsBetween(f2, f4);
+        
+        ubrigeWande--; // Wand-Zähler verringern
     }
 
+    // Hilfsmethode: Verknüpft zwei Felder und blockiert die gemeinsame Kante
+    private void blockWallsBetween(Vec2 a, Vec2 b) {
+        // Berechnet die relative Richtung von A zu B
+        int dirFromAToB = getDirectionEnum(a, b); 
+        int dirFromBToA = getDirectionEnum(b, a);
+
+        Spielleiter.spielFeld[a.x][a.y].BlockSide(dirFromAToB);
+        Spielleiter.spielFeld[b.x][b.y].BlockSide(dirFromBToA);
+    }
+
+    private Vec2 getDirectionVector(int dir) {
+        return switch (dir) {
+            case 1 -> new Vec2(0, -1); // Oben
+            case 2 -> new Vec2(0, 1);  // Unten
+            case 3 -> new Vec2(-1, 0); // Links
+            case 4 -> new Vec2(1, 0);  // Rechts
+            default -> null;
+        };
+    }
+
+    private int getDirectionEnum(Vec2 from, Vec2 to) {
+        if (to.y < from.y) return orientation.up;
+        if (to.y > from.y) return orientation.down;
+        if (to.x < from.x) return orientation.left;
+        return orientation.right;
+    }
+
+    private boolean isValid(Vec2 p) {
+        return p.x >= 0 && p.x < Spielleiter.spielFeld.length && 
+               p.y >= 0 && p.y < Spielleiter.spielFeld[0].length;
+    }
 }
