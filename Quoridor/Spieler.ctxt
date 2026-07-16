@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Spieler
+comment1.params=side
+comment1.target=Spieler(Direction)
+comment2.params=dir
+comment2.target=Vec2\ GetDirectionVector(int)
+comment3.params=from\ to
+comment3.target=int\ GetDirectionEnum(Vec2,\ Vec2)
+comment4.params=p
+comment4.target=boolean\ IsValidPosition(Vec2)
+comment5.params=dir
+comment5.target=void\ MoveTo(int)
+comment6.params=feld\ offset\ wallSide
+comment6.target=void\ SetWall(Vec2,\ int,\ int)
+comment6.text=\n\ @param\ feld\ \ \ \ \ //\ Position\ des\ Feldes\ auf\ dem\ man\ die\ Wand\ plazieren\ will\n\ @param\ offset\ \ \ //\ Richtung\ wo\ es\ plaziert\ wird\ (oben\ /\ unten)\n\ @param\ wallSide\ //\ Richtung\ ins\ welche\ Feld\ es\ \u00FCber\ geht\ (rechts\ /\ links)\ \ \ \ \ \n
+comment7.params=a\ b
+comment7.target=void\ BlockWallsBetween(Vec2,\ Vec2)
+numComments=8
