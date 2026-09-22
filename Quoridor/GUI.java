@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GUI
@@ -13,29 +14,42 @@ public class GUI
 
     public GUI()
     {
+        //BuTTON Pannel größe anpassen und filler auch für Optimalen Platz für Buttons (192px x 192px)
+        //Buttons
         JPanel buttonManager = new JPanel();
-        buttonManager.setLayout(new BorderLayout());
+        buttonManager.setBackground(Color.white);
+        buttonManager.setLayout(new GridLayout(3,3));
         buttonManager.setPreferredSize(new Dimension(252,252));
 
-        JButton buttonUp = new JButton("HALLO");
-        JButton buttonDown = new JButton("HALLO");
-        JButton buttonLeft = new JButton("HALLO");
-        JButton buttonRight = new JButton("HALLO");
-        JButton buttonWall = new JButton("HALLO");
+        JButton buttonUp = new JButton("Up");
+        buttonUp.setPreferredSize(new Dimension(64, 64));
+        JButton buttonDown = new JButton("Down");
+        buttonDown.setPreferredSize(new Dimension(64, 64));
+        JButton buttonLeft = new JButton("Left");
+        buttonLeft.setPreferredSize(new Dimension(64, 64));
+        JButton buttonRight = new JButton("Right");
+        buttonRight.setPreferredSize(new Dimension(64, 64));
+        JButton buttonWall = new JButton("Wall");
+        buttonWall.setPreferredSize(new Dimension(64, 64));
 
-        buttonManager.add(buttonUp, BorderLayout.NORTH);
-        buttonManager.add(buttonDown, BorderLayout.SOUTH);
-        buttonManager.add(buttonRight, BorderLayout.EAST);
-        buttonManager.add(buttonLeft, BorderLayout.WEST);
-        buttonManager.add(buttonWall, BorderLayout.CENTER);
+        //Zeile1
+        buttonManager.add(new JLabel());
+        buttonManager.add(buttonUp);
+        buttonManager.add(new JLabel());
+
+        //Zeile2
+        buttonManager.add(buttonLeft);
+        buttonManager.add(buttonWall);
+        buttonManager.add(buttonRight);
+        
+        //Zeile3
+        buttonManager.add(new JLabel());
+        buttonManager.add(buttonDown);
+        buttonManager.add(new JLabel());
 
         JPanel fillBMn = new JPanel();
         fillBMn.setBackground(Color.white);
         JPanel fillBMs = new JPanel();
-        fillBMn.setBackground(Color.white);
-        JPanel fillBMw = new JPanel();
-        fillBMn.setBackground(Color.white);
-        JPanel fillBMe = new JPanel();
         fillBMn.setBackground(Color.white);
 
 
@@ -59,14 +73,11 @@ public class GUI
         east.setBackground(Color.cyan);
 
         JPanel west = new JPanel();
-        west.setBackground(Color.cyan);
-        west.setLayout(new BorderLayout());
-        west.add(buttonManager, BorderLayout.CENTER);
+        west.setLayout(new GridLayout(3,1));
 
-        west.add(fillBMn, BorderLayout.NORTH);
-        west.add(fillBMs, BorderLayout.SOUTH);
-        west.add(fillBMw, BorderLayout.WEST);
-        west.add(fillBMe, BorderLayout.EAST);
+        west.add(fillBMs);
+        west.add(buttonManager);
+        west.add(fillBMn);
 
         north.setPreferredSize(new Dimension(1080,252));
         south.setPreferredSize(new Dimension(1080,252));
