@@ -1,12 +1,7 @@
 //Imports
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
+
 
 public class GUI
 {
@@ -14,46 +9,6 @@ public class GUI
 
     public GUI()
     {
-        //BuTTON Pannel größe anpassen und filler auch für Optimalen Platz für Buttons (192px x 192px)
-        //Buttons
-        JPanel buttonManager = new JPanel();
-        buttonManager.setBackground(Color.white);
-        buttonManager.setLayout(new GridLayout(3,3));
-        buttonManager.setPreferredSize(new Dimension(252,252));
-
-        JButton buttonUp = new JButton("Up");
-        buttonUp.setPreferredSize(new Dimension(64, 64));
-        JButton buttonDown = new JButton("Down");
-        buttonDown.setPreferredSize(new Dimension(64, 64));
-        JButton buttonLeft = new JButton("Left");
-        buttonLeft.setPreferredSize(new Dimension(64, 64));
-        JButton buttonRight = new JButton("Right");
-        buttonRight.setPreferredSize(new Dimension(64, 64));
-        JButton buttonWall = new JButton("Wall");
-        buttonWall.setPreferredSize(new Dimension(64, 64));
-
-        //Zeile1
-        buttonManager.add(new JLabel());
-        buttonManager.add(buttonUp);
-        buttonManager.add(new JLabel());
-
-        //Zeile2
-        buttonManager.add(buttonLeft);
-        buttonManager.add(buttonWall);
-        buttonManager.add(buttonRight);
-        
-        //Zeile3
-        buttonManager.add(new JLabel());
-        buttonManager.add(buttonDown);
-        buttonManager.add(new JLabel());
-
-        JPanel fillBMn = new JPanel();
-        fillBMn.setBackground(Color.white);
-        JPanel fillBMs = new JPanel();
-        fillBMn.setBackground(Color.white);
-
-
-
         JFrame frame = new JFrame();//erstellt Fenster
         frame.setSize(1080, 1080);
         frame.setTitle("Quoridor");//Fenstername
@@ -61,32 +16,32 @@ public class GUI
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());//Borderlayout wird für frame festgelegt
 
-        
         //Frame NSEW Panels
-        JPanel north = new JPanel();
-        north.setBackground(Color.orange);
+        JPanel north = new BackgroundPanel("Quoridor/textureTop.JPG");
 
-        JPanel south = new JPanel();
-        south.setBackground(Color.orange);
+        JPanel south = new BackgroundPanel("Quoridor/textureBottom.JPG");
 
-        JPanel east = new JPanel();
-        east.setBackground(Color.cyan);
+        JPanel east = new BackgroundPanel("Quoridor/textureRight.JPG");
 
-        JPanel west = new JPanel();
-        west.setLayout(new GridLayout(3,1));
+        JPanel west = new BackgroundPanel("Quoridor/textureLeft.JPG");
 
-        west.add(fillBMs);
-        west.add(buttonManager);
-        west.add(fillBMn);
+        JLayeredPane westLayers = new JLayeredPane();
+        westLayers.setPreferredSize(new Dimension(251, 576));
+        west.setBounds(0, 0, 252, 576);
+        westLayers.add(west, Integer.valueOf(0));
+        //controllsWest = new ControllsWest();
 
+        //westLayers.add(ControllsWest, Integer.valueOf(100));
+    
         north.setPreferredSize(new Dimension(1080,252));
         south.setPreferredSize(new Dimension(1080,252));
         east.setPreferredSize(new Dimension(252,576));
-        west.setPreferredSize(new Dimension(252,576));
+        //controllsWest.setPreferredSize(new Dimension(252,576));
 
 
         //SpielfeldPanel
         JPanel spielfeldPanel = new JPanel();//SpielfeldPanel erstellen
+        spielfeldPanel.setBackground(Color.gray);
         spielfeldPanel.setBounds(0, 0, 576, 576);
         spielfeldPanel.setLayout(new GridLayout(9,9));//spielfeldPanel bekommt GridLayout von 9x9
         spielfeldPanel.setPreferredSize(new Dimension(576, 576));
@@ -105,7 +60,7 @@ public class GUI
         frame.add(north, BorderLayout.NORTH);//north wird in NORTH geadded
         frame.add(south, BorderLayout.SOUTH);//south wird in SOUTH geadded
         frame.add(east, BorderLayout.EAST);//east wird in EAST geadded
-        frame.add(west, BorderLayout.WEST);//west wird in WEST geadded
+        frame.add(westLayers, BorderLayout.WEST);//west wird in WEST geadded
         frame.pack();
         frame.setVisible(true);//fenster sichtbar
     }
