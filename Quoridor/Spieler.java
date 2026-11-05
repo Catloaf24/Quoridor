@@ -81,7 +81,7 @@ public class Spieler
         
         ubrigeWande--;
     }
-*/
+
 
     private void BlockWallsBetween(Vec2 a, Vec2 b) 
     {
@@ -92,6 +92,7 @@ public class Spieler
         Spielleiter.spielFeld[b.x][b.y].BlockSide(dirFromBToA);
     }
 }
+*/
 
 Vec2 validFelder(Vec2 f1, Vec2 f2) {
     //oben benachbart
@@ -119,6 +120,6 @@ void setWall(Vec2 f1, Vec2 f2) {
 
     if (valid.x == 0) return;
 
-    Spielleiter.spielFeld[f1.x][f1.y].BlockSide(valid.x);
-    Spielleiter.spielFeld[f2.x][f2.y].BlockSide(valid.y);
+    if (!Spielleiter.spielFeld[f1.x][f1.y].IsBlocked(valid.x)) {Spielleiter.spielFeld[f1.x][f1.y].BlockSide(valid.x);}
+    if (!Spielleiter.spielFeld[f2.x][f2.y].IsBlocked(valid.y)) {Spielleiter.spielFeld[f2.x][f2.y].BlockSide(valid.y);}
 }
