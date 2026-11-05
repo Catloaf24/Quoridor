@@ -49,12 +49,12 @@ public class Spieler
             pos = targetPos;
         }
     }
-
-    /**
+/*
+    /*
      * @param feld     // Position des Feldes auf dem man die Wand plazieren will
      * @param offset   // Richtung wo es plaziert wird (oben / unten)
      * @param wallSide // Richtung ins welche Feld es über geht (rechts / links)     
-    **/
+    /
     public void SetWall(Vec2 feld, int offset, int wallSide) 
     {
         Vec2 offsetDir = GetDirectionVector(offset), wallDir = GetDirectionVector(wallSide);
@@ -81,6 +81,7 @@ public class Spieler
         
         ubrigeWande--;
     }
+*/
 
     private void BlockWallsBetween(Vec2 a, Vec2 b) 
     {
@@ -90,4 +91,34 @@ public class Spieler
         Spielleiter.spielFeld[a.x][a.y].BlockSide(dirFromAToB);
         Spielleiter.spielFeld[b.x][b.y].BlockSide(dirFromBToA);
     }
+}
+
+Vec2 validFelder(Vec2 f1, Vec2 f2) {
+    //oben benachbart
+    if (f1.x == f2.y - 1) {
+        return new Vec2(orientation.up, orientation.down);
+    }
+    //unten benachbart
+    if (f1.x == f2.y + 1) {
+        return new Vec2(orientation.down, orientation.down);
+    }
+    //links benachbart
+    if (f1.y == f2.y - 1) {
+        return new Vec2(orientation.left, orientation.right);
+    }
+    //rechts benachbart
+    if (f1.y == f2.y + 1) { 
+        return new Vec2(orientation.right, orientation.left);
+    }
+
+    return new Vec2(0, 0);
+}
+
+void setWall(Vec2 f1, Vec2 f2) {
+    int valid = validFelder(f1, f2);
+
+    if (valid.x == 0) return;
+
+    Spielleiter.spielFeld[f1.x][f1.y].BlockSide(valid.x);
+    Spielleiter.spielFeld[f2.x][f2.y].BlockSide(valid.y);
 }
