@@ -1,11 +1,7 @@
 //Imports
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
+
 
 public class GUI
 {
@@ -13,33 +9,6 @@ public class GUI
 
     public GUI()
     {
-        JPanel buttonManager = new JPanel();
-        buttonManager.setLayout(new BorderLayout());
-        buttonManager.setPreferredSize(new Dimension(252,252));
-
-        JButton buttonUp = new JButton("HALLO");
-        JButton buttonDown = new JButton("HALLO");
-        JButton buttonLeft = new JButton("HALLO");
-        JButton buttonRight = new JButton("HALLO");
-        JButton buttonWall = new JButton("HALLO");
-
-        buttonManager.add(buttonUp, BorderLayout.NORTH);
-        buttonManager.add(buttonDown, BorderLayout.SOUTH);
-        buttonManager.add(buttonRight, BorderLayout.EAST);
-        buttonManager.add(buttonLeft, BorderLayout.WEST);
-        buttonManager.add(buttonWall, BorderLayout.CENTER);
-
-        JPanel fillBMn = new JPanel();
-        fillBMn.setBackground(Color.white);
-        JPanel fillBMs = new JPanel();
-        fillBMn.setBackground(Color.white);
-        JPanel fillBMw = new JPanel();
-        fillBMn.setBackground(Color.white);
-        JPanel fillBMe = new JPanel();
-        fillBMn.setBackground(Color.white);
-
-
-
         JFrame frame = new JFrame();//erstellt Fenster
         frame.setSize(1080, 1080);
         frame.setTitle("Quoridor");//Fenstername
@@ -48,24 +17,22 @@ public class GUI
         frame.setLayout(new BorderLayout());//Borderlayout wird für frame festgelegt
 
         //Frame NSEW Panels
-        JPanel north = new BackgroundPanel("textureTop.JPG");
+        JPanel north = new BackgroundPanel("Quoridor/textureTop.JPG");
 
-        JPanel south = new BackgroundPanel("textureBottom.JPG");
+        JPanel south = new BackgroundPanel("Quoridor/textureBottom.JPG");
 
-        JPanel east = new BackgroundPanel("textureRight.JPG");
+        JPanel east = new BackgroundPanel("Quoridor/textureRight.JPG");
 
-        JPanel west = new BackgroundPanel("textureLeft.JPG");
+        JPanel west = new BackgroundPanel("Quoridor/textureLeft.JPG");
 
-        JPanel west = new JPanel();
-        west.setBackground(Color.cyan);
-        west.setLayout(new BorderLayout());
-        west.add(buttonManager, BorderLayout.CENTER);
+        JLayeredPane westLayers = new JLayeredPane();
+        westLayers.setPreferredSize(new Dimension(251, 576));
+        west.setBounds(0, 0, 252, 576);
+        westLayers.add(west, Integer.valueOf(0));
+        //controllsWest = new ControllsWest();
 
-        west.add(fillBMn, BorderLayout.NORTH);
-        west.add(fillBMs, BorderLayout.SOUTH);
-        west.add(fillBMw, BorderLayout.WEST);
-        west.add(fillBMe, BorderLayout.EAST);
-
+        //westLayers.add(ControllsWest, Integer.valueOf(100));
+    
         north.setPreferredSize(new Dimension(1080,252));
         south.setPreferredSize(new Dimension(1080,252));
         east.setPreferredSize(new Dimension(252,576));
