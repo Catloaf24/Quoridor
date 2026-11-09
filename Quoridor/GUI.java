@@ -1,7 +1,11 @@
 //Imports
-import java.awt.*;
-import javax.swing.*;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GUI
 {
@@ -9,6 +13,33 @@ public class GUI
 
     public GUI()
     {
+        JPanel buttonManager = new JPanel();
+        buttonManager.setLayout(new BorderLayout());
+        buttonManager.setPreferredSize(new Dimension(252,252));
+
+        JButton buttonUp = new JButton("HALLO");
+        JButton buttonDown = new JButton("HALLO");
+        JButton buttonLeft = new JButton("HALLO");
+        JButton buttonRight = new JButton("HALLO");
+        JButton buttonWall = new JButton("HALLO");
+
+        buttonManager.add(buttonUp, BorderLayout.NORTH);
+        buttonManager.add(buttonDown, BorderLayout.SOUTH);
+        buttonManager.add(buttonRight, BorderLayout.EAST);
+        buttonManager.add(buttonLeft, BorderLayout.WEST);
+        buttonManager.add(buttonWall, BorderLayout.CENTER);
+
+        JPanel fillBMn = new JPanel();
+        fillBMn.setBackground(Color.white);
+        JPanel fillBMs = new JPanel();
+        fillBMn.setBackground(Color.white);
+        JPanel fillBMw = new JPanel();
+        fillBMn.setBackground(Color.white);
+        JPanel fillBMe = new JPanel();
+        fillBMn.setBackground(Color.white);
+
+
+
         JFrame frame = new JFrame();//erstellt Fenster
         frame.setSize(1080, 1080);
         frame.setTitle("Quoridor");//Fenstername
@@ -25,14 +56,16 @@ public class GUI
 
         JPanel west = new BackgroundPanel("textureLeft.JPG");
 
-        JLayeredPane westLayers = new JLayeredPane();
-        westLayers.setPreferredSize(new Dimension(251, 576));
-        west.setBounds(0, 0, 252, 576);
-        westLayers.add(west, Integer.valueOf(0));
-        //controllsWest = new ControllsWest();
+        JPanel west = new JPanel();
+        west.setBackground(Color.cyan);
+        west.setLayout(new BorderLayout());
+        west.add(buttonManager, BorderLayout.CENTER);
 
-        //westLayers.add(ControllsWest, Integer.valueOf(100));
-    
+        west.add(fillBMn, BorderLayout.NORTH);
+        west.add(fillBMs, BorderLayout.SOUTH);
+        west.add(fillBMw, BorderLayout.WEST);
+        west.add(fillBMe, BorderLayout.EAST);
+
         north.setPreferredSize(new Dimension(1080,252));
         south.setPreferredSize(new Dimension(1080,252));
         east.setPreferredSize(new Dimension(252,576));
