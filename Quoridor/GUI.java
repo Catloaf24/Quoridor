@@ -16,28 +16,28 @@ public class GUI
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());//Borderlayout wird für frame festgelegt
 
-        //Frame NSEW Panels
-        JPanel north = new BackgroundPanel("Quoridor/textureTop.JPG");
+        //Layers erstellen
+        JLayeredPane layers = new JLayeredPane();
+        layers.setPreferredSize(new Dimension(1080, 1080));
 
-        JPanel south = new BackgroundPanel("Quoridor/textureBottom.JPG");
+        //-----------------------------------------------------------------------------------------------------
 
-        JPanel east = new BackgroundPanel("Quoridor/textureRight.JPG");
+        //Background NSEW Panels
+        JPanel north = new BackgroundPanel("textureTop.JPG");
 
-        JPanel west = new BackgroundPanel("Quoridor/textureLeft.JPG");
+        JPanel south = new BackgroundPanel("textureBottom.JPG");
 
-        JLayeredPane westLayers = new JLayeredPane();
-        westLayers.setPreferredSize(new Dimension(251, 576));
-        west.setBounds(0, 0, 252, 576);
-        westLayers.add(west, Integer.valueOf(0));
-        //controllsWest = new ControllsWest();
+        JPanel east = new BackgroundPanel("textureRight.JPG");
 
-        //westLayers.add(ControllsWest, Integer.valueOf(100));
+        JPanel west = new BackgroundPanel("textureLeft.JPG");
     
+        //NSEW Panels size
         north.setPreferredSize(new Dimension(1080,252));
         south.setPreferredSize(new Dimension(1080,252));
         east.setPreferredSize(new Dimension(252,576));
-        //controllsWest.setPreferredSize(new Dimension(252,576));
+        west.setPreferredSize(new Dimension(252,576));
 
+        //-------------------------------------------------------------------------------------------------------
 
         //SpielfeldPanel
         JPanel spielfeldPanel = new JPanel();//SpielfeldPanel erstellen
@@ -54,15 +54,41 @@ public class GUI
             System.out.println("Feld" + i);
             spielfeldPanel.add(array[i]);
             }
+        
+        //-----------------------------------------------------------------------------------------------------
+
+        //SpielerPanel
+        JPanel spielerRed = new SpielerPanel("SpielfeldPlayerRed.png");
+        spielerRed.setPreferredSize(new Dimension(64,64));
+        spielerRed.setBounds(508, 252, 64, 64); //variablen für movement die dann angepasst werden von movement Methode/Klasse, Aktualisierung mit .reprint
+        
+        //JPanel spielerBlue = new SpielerPanel("SpielfeldPlayerBlue.png"); //SpielerBlau datei adden
+        
+        //-----------------------------------------------------------------------------------------------------
+
+        //Hintergrund
+        JPanel hintergrund = new JPanel();
+        hintergrund.setLayout(new BorderLayout());
+        hintergrund.setBounds(0, 0, 1080, 1080);
+
+        //Hintergrund main Assembly
+        hintergrund.add(spielfeldPanel, BorderLayout.CENTER);
+        hintergrund.add(north, BorderLayout.NORTH);
+        hintergrund.add(south, BorderLayout.SOUTH);
+        hintergrund.add(east, BorderLayout.EAST);
+        hintergrund.add(west, BorderLayout.WEST);
+        
+        //-----------------------------------------------------------------------------------------------------
+
+        //Alles in die Layers adden
+        layers.add(hintergrund, Integer.valueOf(1));
+        layers.add(spielerRed, Integer.valueOf(2));
 
         //Main Assembly
-        frame.add(spielfeldPanel, BorderLayout.CENTER);//spielfeldPanel wird in Center geadded
-        frame.add(north, BorderLayout.NORTH);//north wird in NORTH geadded
-        frame.add(south, BorderLayout.SOUTH);//south wird in SOUTH geadded
-        frame.add(east, BorderLayout.EAST);//east wird in EAST geadded
-        frame.add(westLayers, BorderLayout.WEST);//west wird in WEST geadded
+        frame.add(layers);
         frame.pack();
         frame.setVisible(true);//fenster sichtbar
+
     }
     public static void main(String[] args)
     {
