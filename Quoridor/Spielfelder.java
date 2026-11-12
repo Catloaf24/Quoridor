@@ -10,7 +10,7 @@ public class Spielfelder extends JPanel {
     Image image;
 
     Spielfelder() {
-        image = new ImageIcon("SpielfeldBildtest.png").getImage();
+        image = new ImageIcon("Textures\\\\SpielfeldBildtest.png").getImage();
         setPreferredSize(new Dimension(64, 64));
     }
 

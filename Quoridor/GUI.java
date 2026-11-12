@@ -23,13 +23,13 @@ public class GUI
         //-----------------------------------------------------------------------------------------------------
 
         //Background NSEW Panels
-        JPanel north = new BackgroundPanel("textureTop.JPG");
+        JPanel north = new BackgroundPanel("Textures\\\\textureTop.JPG");
 
-        JPanel south = new BackgroundPanel("textureBottom.JPG");
+        JPanel south = new BackgroundPanel("Textures\\\\textureBottom.JPG");
 
-        JPanel east = new BackgroundPanel("textureRight.JPG");
+        JPanel east = new BackgroundPanel("Textures\\\\textureRight.JPG");
 
-        JPanel west = new BackgroundPanel("textureLeft.JPG");
+        JPanel west = new BackgroundPanel("Textures\\\\textureLeft.JPG");
     
         //NSEW Panels size
         north.setPreferredSize(new Dimension(1080,252));
@@ -58,11 +58,15 @@ public class GUI
         //-----------------------------------------------------------------------------------------------------
 
         //SpielerPanel
-        JPanel spielerRed = new SpielerPanel("SpielfeldPlayerRed.png");
+        JPanel spielerRed = new SpielerPanel("Textures\\\\Quoridor_Player_R.png");
+        spielerRed.setOpaque(false);
         spielerRed.setPreferredSize(new Dimension(64,64));
         spielerRed.setBounds(508, 252, 64, 64); //variablen für movement die dann angepasst werden von movement Methode/Klasse, Aktualisierung mit .reprint
         
-        //JPanel spielerBlue = new SpielerPanel("SpielfeldPlayerBlue.png"); //SpielerBlau datei adden
+        JPanel spielerBlue = new SpielerPanel("Textures\\Quoridor_Player_B.png");
+        spielerBlue.setOpaque(false);
+        spielerBlue.setPreferredSize(new Dimension(64,64));
+        spielerBlue.setBounds(508, 764, 64, 64);
         
         //-----------------------------------------------------------------------------------------------------
 
@@ -83,6 +87,7 @@ public class GUI
         //Alles in die Layers adden
         layers.add(hintergrund, Integer.valueOf(1));
         layers.add(spielerRed, Integer.valueOf(2));
+        layers.add(spielerBlue, Integer.valueOf(2));
 
         //Main Assembly
         frame.add(layers);
