@@ -88,6 +88,9 @@ public class GUI
         layers.add(hintergrund, Integer.valueOf(1));
         layers.add(spielerRed, Integer.valueOf(2));
         layers.add(spielerBlue, Integer.valueOf(2));
+        
+        //Steuerung aktivieren
+        new steuerung(layers, spielerRed, spielerBlue);
 
         //Main Assembly
         frame.add(layers);
