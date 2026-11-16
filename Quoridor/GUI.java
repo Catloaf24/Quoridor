@@ -68,6 +68,12 @@ public class GUI
         spielerBlue.setPreferredSize(new Dimension(64,64));
         spielerBlue.setBounds(508, 764, 64, 64);
         
+        //Walls
+        JPanel wallPanelB = new WallPanel("Textures\\WallB.png");
+        wallPanelB.setOpaque(false);
+        wallPanelB.setPreferredSize(new Dimension(7, 128));
+        wallPanelB.setBounds(492, 65, 7, 128);
+        //Wall rotate möglichkeit finden, entweder neue rotated textur replacen oder vtl ne Methode die das kann
         //-----------------------------------------------------------------------------------------------------
 
         //Hintergrund
@@ -88,6 +94,7 @@ public class GUI
         layers.add(hintergrund, Integer.valueOf(1));
         layers.add(spielerRed, Integer.valueOf(2));
         layers.add(spielerBlue, Integer.valueOf(2));
+        layers.add(wallPanelB, Integer.valueOf(3));
         
         //Steuerung aktivieren
         new steuerung(layers, spielerRed, spielerBlue);
