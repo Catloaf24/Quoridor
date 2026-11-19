@@ -73,7 +73,7 @@ public class GUI
         wallPanelB.setOpaque(false);
         wallPanelB.setPreferredSize(new Dimension(7, 128));
         wallPanelB.setBounds(492, 65, 7, 128);
-        //Wall rotate möglichkeit finden, entweder neue rotated textur replacen oder vtl ne Methode die das kann
+        //Wall Tetxtur als rotated adden für B und R 
         //-----------------------------------------------------------------------------------------------------
 
         //Hintergrund
@@ -96,9 +96,10 @@ public class GUI
         layers.add(spielerBlue, Integer.valueOf(2));
         layers.add(wallPanelB, Integer.valueOf(3));
         
-        //Steuerung aktivieren
-        new steuerung(layers, spielerRed, spielerBlue);
-
+        //Steuerungen erzeugen
+        steuerungR steuerungR = new steuerungR(layers, spielerRed, spielerBlue);
+        steuerungB steuerungB = new steuerungB(layers, spielerRed, spielerBlue);
+        
         //Main Assembly
         frame.add(layers);
         frame.pack();
