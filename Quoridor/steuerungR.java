@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
 //Steuerung an/aus mit steuerungR.setAktiv(false/true)
 //Steuerung aktiv? -> steuerungR.istAktiv()
 
-public class steuerungR
+public class SteuerungR
 {
     // PLATZHALTER 1: Maße deines Spielfelds anpassen
     private static final int FELD_X = 252;  // linker Rand des Spielfelds in Pixel
@@ -33,7 +33,7 @@ public class steuerungR
      * @param spielerRed
      * @param spielerBlue
      */
-    public steuerungR(JComponent komponente, JComponent spielerRed, JComponent spielerBlue)
+    public SteuerungR(JComponent komponente, JComponent spielerRed, JComponent spielerBlue)
     {
         this.spielerRed = spielerRed;
         this.spielerBlue = spielerBlue;
@@ -120,6 +120,6 @@ public class steuerungR
         spielerRed.setLocation(neuX, neuY);
 
         // PLATZHALTER 3: Spiellogik über den Zug informieren (z. B. Position speichern, Spieler wechseln)
-        // deineSpiellogik.zugGemacht(spielerRed, dx, dy);
+        //Spielleiter.MakeMove(1, dx, dy);
     }
 }

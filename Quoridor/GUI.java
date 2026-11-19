@@ -5,7 +5,8 @@ import javax.swing.*;
 
 public class GUI
 {
-    
+    SteuerungR steuerungR;
+    SteuerungB steuerungB;
 
     public GUI()
     {
@@ -97,8 +98,8 @@ public class GUI
         layers.add(wallPanelB, Integer.valueOf(3));
         
         //Steuerungen erzeugen
-        steuerungR steuerungR = new steuerungR(layers, spielerRed, spielerBlue);
-        steuerungB steuerungB = new steuerungB(layers, spielerRed, spielerBlue);
+        steuerungR = new SteuerungR(layers, spielerRed, spielerBlue);
+        steuerungB = new SteuerungB(layers, spielerRed, spielerBlue);
         
         //Main Assembly
         frame.add(layers);
@@ -106,8 +107,10 @@ public class GUI
         frame.setVisible(true);//fenster sichtbar
 
     }
+    /*
     public static void main(String[] args)
     {
         GUI gui = new GUI();
     }
+    */
 }
