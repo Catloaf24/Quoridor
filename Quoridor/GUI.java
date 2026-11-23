@@ -7,6 +7,8 @@ public class GUI
 {
     SteuerungR steuerungR;
     SteuerungB steuerungB;
+    WandSteuerungR wandR;
+    WandSteuerungB wandB;
 
     public GUI()
     {
@@ -129,6 +131,12 @@ public class GUI
         steuerungR = new SteuerungR(layers, spielerRed, spielerBlue);
         steuerungB = new SteuerungB(layers, spielerRed, spielerBlue);
         
+        WandBrett wandBrett = new WandBrett();
+        wandB = new WandSteuerungB(layers, spielerRed, spielerBlue, wandBrett, walls);
+        wandR = new WandSteuerungR(layers, spielerRed, spielerBlue, wandBrett, walls1);
+        wandB.setAktiv(true);
+        wandR.setAktiv(false);
+
         //Main Assembly
         frame.add(layers);
         frame.pack();
@@ -136,6 +144,9 @@ public class GUI
 
     }
     
+    //---------------------------------------------------------------------------------------------------------
+
+    //Main Methods
     public static void main(String[] args)
     {
         GUI gui = new GUI();
@@ -158,6 +169,11 @@ public class GUI
         int index;
         index = y * 9 + x;
         System.out.println(index);
+    }
+
+    public void placeWall()
+    {
+        
     }
 
 }
