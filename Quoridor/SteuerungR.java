@@ -89,6 +89,8 @@ public class SteuerungR
                 if (gedrueckt.add(keyCode))
                 {
                     bewege(dx, dy);
+                    steuerungR.setAktiv(false);
+                    steuerungB.setAktiv(true);
                 }
             }
         });
@@ -125,13 +127,11 @@ public class SteuerungR
             if (neuY < FELD_Y || neuY > FELD_Y + (ANZAHL - 1) * ZELLE) return;
         }
 
-        movePlayer(NewSpieler player, Vec2 nPos);
-        steuerungR.setAktiv(false);
-        steuerungB.setAktiv(true);
-    
         spielerRed.setLocation(neuX, neuY);
 
         // PLATZHALTER 3: Spiellogik über den Zug informieren (z. B. Position speichern, Spieler wechseln)
         //Spielleiter.MakeMove(1, dx, dy);
+        movePlayer(NewSpieler player, Vec2 nPos);
+        
     }
 }
