@@ -135,10 +135,29 @@ public class GUI
         frame.setVisible(true);//fenster sichtbar
 
     }
-    /*
+    
     public static void main(String[] args)
     {
         GUI gui = new GUI();
+        feldToCords(17);
+        cordsToFeld(8, 1);
     }
-    */
+    
+    public static void feldToCords(int index)
+    {
+        int x;
+        int y;
+        x = index / 9;
+        y = index % 9;
+        System.out.println(x);
+        System.out.println(y);
+    }
+
+    public static void cordsToFeld(int x, int y)
+    {
+        int index;
+        index = y * 9 + x;
+        System.out.println(index);
+    }
+
 }
