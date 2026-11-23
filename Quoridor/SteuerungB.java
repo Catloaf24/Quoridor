@@ -23,6 +23,8 @@ public class SteuerungB
 
     private boolean aktiv = true;
 
+    NewSpielleiter sl;
+
     // Verhindert, dass gedrückt halten mehrere Felder auf einmal läuft
     private final Set<Integer> gedrueckt = new HashSet<>();
 
@@ -45,7 +47,7 @@ public class SteuerungB
         belegeTaste(im, am, KeyEvent.VK_RIGHT, 1, 0);
     }
 
-    public SteuerungB(NewSpielleiter sl) {
+    public void setSL(NewSpielleiter sl) {
         this.sl = sl;
     }
 
@@ -116,7 +118,7 @@ public class SteuerungB
             if (neuY < FELD_Y || neuY > FELD_Y + (ANZAHL - 1) * ZELLE) return;
         }
 
-        NewSpielleiter.validateMove(Vec2 cPos, Vec2 nPos).
+        //NewSpielleiter.validateMove(cPos, Vec2 nPos).
 
         spielerBlue.setLocation(neuX, neuY);
 

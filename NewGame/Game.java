@@ -1,4 +1,4 @@
-import GUI.GUI;
+//import GUI.GUI;
 
 public class Game {
 
@@ -37,6 +37,7 @@ public class Game {
 		*/
 
 		GUI gui = new GUI();
-		
+		gui.steuerungR.setSL(sl);
+		gui.steuerungB.setSL(sl);
 	}
 }

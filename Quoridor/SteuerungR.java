@@ -25,6 +25,8 @@ public class SteuerungR
     // Ist die Steuerung gerade an? (am Anfang: an)
     private boolean aktiv = true;
 
+    NewSpielleiter sl;
+
     // Verhindert, dass gedrückt halten mehrere Felder auf einmal läuft
     private final Set<Integer> gedrueckt = new HashSet<>();
 
@@ -45,6 +47,10 @@ public class SteuerungR
         belegeTaste(im, am, KeyEvent.VK_S, 0, 1);
         belegeTaste(im, am, KeyEvent.VK_A, -1, 0);
         belegeTaste(im, am, KeyEvent.VK_D, 1, 0);
+    }
+
+    public void setSL(NewSpielleiter sl) {
+        this.sl = sl;
     }
 
     //Schaltet die Steuerung ein oder aus
