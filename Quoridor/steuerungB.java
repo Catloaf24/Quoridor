@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
 //Steuerung an/aus mit steuerungB.setAktiv(false/true)
 //Steuerung aktiv? -> steuerungR.istAktiv()
 
-public class steuerungB
+public class SteuerungB
 {
     private static final int FELD_X = 252;  // linker Rand des Spielfelds in Pixel
     private static final int FELD_Y = 252;  // oberer Rand des Spielfelds in Pixel
@@ -31,7 +31,7 @@ public class steuerungB
      * @param spielerRed
      * @param spielerBlue
      */
-    public steuerungB(JComponent komponente, JComponent spielerRed, JComponent spielerBlue)
+    public SteuerungB(JComponent komponente, JComponent spielerRed, JComponent spielerBlue)
     {
         this.spielerRed = spielerRed;
         this.spielerBlue = spielerBlue;

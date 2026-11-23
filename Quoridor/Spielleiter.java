@@ -1,9 +1,11 @@
 class Spielleiter
 {
-    static FeldData[][] spielFeld;
+    public static FeldData[][] spielFeld;
 
     static Spieler spieler1;
     static Spieler spieler2;
+
+    GUI gui;
 
     private Spieler currentPlayer = spieler1;
 
@@ -15,6 +17,10 @@ class Spielleiter
 
         spieler1 = new Spieler(new Direction(1, 2, 3, 4));
         spieler2 = new Spieler(new Direction(2, 1, 4, 3));
+
+        gui = new GUI();
+        gui.steuerungB.setAktiv(true);
+        gui.steuerungR.setAktiv(false);
     }
 
     static boolean CanMoveTo(Vec2 pos, int dir)
@@ -36,56 +42,19 @@ class Spielleiter
             spielFeld[feld.x][feld.y + offset].BlockSide(dir);
     }
 
-    void NächsterZug() {
-        System.out.println("Spieler " + currentPlayer + " ist am Zug");
-        System.out.println("Willst du dich bewgegen(1) oder eine Wand platzieren(2)?");
-        int choice = Integer.parseInt(System.console().readLine());
-        //Case: moving
-        int choiceDir = 0;
-        //Case: placing wall
-        Vec2 start = new Vec2(0, 0);
-        int offset = 0;
-        int side = 0;
+    public void MakeMove(int dx, int dy) {
+        int dir = currentPlayer.GetDirectionEnum(currentPlayer.pos, new Vec2(dx, dy));
+        if (!CanMoveTo(currentPlayer.pos, dir)) return;
+    }
 
-        if (choice == 1) {
-            System.out.println("Welche Richtung? (O: 1, U: 2, L: 3, R: 4)");
-            choiceDir = Integer.parseInt(System.console().readLine());
-        }
-        if (choice == 2) {
-            System.out.println("Gib das X des ersten Feldes an:");
-            start.x = Integer.parseInt(System.console().readLine());
-            System.out.println("Gib das Y des ersten Feldes an:");
-            start.y = Integer.parseInt(System.console().readLine());
-            System.out.println("Welche Richtung? (O: 1, U: 2, L: 3, R: 4)");
-            offset = Integer.parseInt(System.console().readLine());
-            System.out.println("Welche Seite? (O: 1, U: 2, L: 3, R: 4)");
-            side = Integer.parseInt(System.console().readLine());
-
-            SetWall(start, offset, side);
-        }
-
-        if (choice == 1 && CanMoveTo(currentPlayer.pos, choiceDir))  {
-            switch (choiceDir) {
-                case 1:
-                    currentPlayer.pos.y--;
-                    break;
-                case 2:
-                    currentPlayer.pos.y++;
-                    break;
-                case 3:
-                    currentPlayer.pos.x--;
-                    break;
-                case 4:
-                    currentPlayer.pos.x++;
-                    break;
-            }
-        }
-
-        currentPlayer = (currentPlayer == spieler1) ? spieler2 : spieler1;
+    public boolean CheckWin(Spieler player) {
+        if (player.pos.y == player.winRow) 
+            return true;
+        else 
+            return false;
     }
 
     void Gameloop() {
-
+        
     }
-
 }
