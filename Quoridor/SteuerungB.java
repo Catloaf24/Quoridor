@@ -24,6 +24,7 @@ public class SteuerungB
     private boolean aktiv = true;
 
     NewSpielleiter sl;
+    NewSpieler s1;
 
     // Verhindert, dass gedrückt halten mehrere Felder auf einmal läuft
     private final Set<Integer> gedrueckt = new HashSet<>();
@@ -49,6 +50,10 @@ public class SteuerungB
 
     public void setSL(NewSpielleiter sl) {
         this.sl = sl;
+    }
+
+    public void setSpieler(NewSpieler s1) {
+        this.s1 = s1;
     }
 
     //Schaltet die Steuerung ein oder aus
