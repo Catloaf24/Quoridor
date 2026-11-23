@@ -1,3 +1,5 @@
+import GUI.GUI;
+
 public class Game {
 
 	static NewSpieler s1 = new NewSpieler(1);

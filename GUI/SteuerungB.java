@@ -45,6 +45,10 @@ public class SteuerungB
         belegeTaste(im, am, KeyEvent.VK_RIGHT, 1, 0);
     }
 
+    public SteuerungB(NewSpielleiter sl) {
+        this.sl = sl;
+    }
+
     //Schaltet die Steuerung ein oder aus
     public void setAktiv(boolean aktiv)
     {
@@ -112,8 +116,7 @@ public class SteuerungB
             if (neuY < FELD_Y || neuY > FELD_Y + (ANZAHL - 1) * ZELLE) return;
         }
 
-        // PLATZHALTER 2: Regelprüfung deiner Spiellogik (z. B. Wände)
-        // if (!deineSpiellogik.darfZiehen(spielerBlue, dx, dy)) return;
+        NewSpielleiter.validateMove(Vec2 cPos, Vec2 nPos).
 
         spielerBlue.setLocation(neuX, neuY);
 

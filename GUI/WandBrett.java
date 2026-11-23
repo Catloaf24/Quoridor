@@ -1,31 +1,20 @@
 import java.awt.Rectangle;
 import java.util.ArrayDeque;
 
-/**
- * Gemeinsamer Wand-Zustand + Regeln für beide Spieler (Blau und Rot).
- *
- * Koordinaten:
- *  - Felder:   Spalte/Zeile 0..8
- *  - Knoten:   Die 8x8 Kreuzungspunkte ZWISCHEN den Feldern (a, b mit 0..7).
- *              Knoten (a, b) liegt an der Ecke der Felder (a,b) (a+1,b) (a,b+1) (a+1,b+1).
- *  - Eine Wand ist immer 2 Felder lang und mittig auf einem Knoten:
- *      horizontale Wand (a, b): liegt unter Zeile b, deckt Spalte a und a+1 ab
- *      vertikale Wand   (a, b): liegt rechts von Spalte a, deckt Zeile b und b+1 ab
- */
 public class WandBrett
 {
-    public static final int FELD_X  = 252;  // linker Rand des Spielfelds in Pixel
-    public static final int FELD_Y  = 252;  // oberer Rand des Spielfelds in Pixel
-    public static final int ZELLE   = 64;   // Größe eines Feldes in Pixel
-    public static final int ANZAHL  = 9;    // Felder pro Reihe / Spalte
+    public static final int FELD_X  = 252;
+    public static final int FELD_Y  = 252;  
+    public static final int ZELLE   = 64;   
+    public static final int ANZAHL  = 9;    
     public static final int KNOTEN  = ANZAHL - 1;
 
-    public static final int WAND_DICKE  = 7;            // wie die Texturen (7 x 128)
-    public static final int WAND_LAENGE = 2 * ZELLE;    // 128
-    public static final int KANTEN_TOLERANZ = 12;       // so nah (in Pixel) muss die Maus an der Kante sein
+    public static final int WAND_DICKE  = 7;            
+    public static final int WAND_LAENGE = 2 * ZELLE;    
+    public static final int KANTEN_TOLERANZ = 12;       
 
-    public static final int ZIELZEILE_BLAU = 0;         // Blau startet unten, will nach oben
-    public static final int ZIELZEILE_ROT  = ANZAHL - 1;// Rot startet oben, will nach unten
+    public static final int ZIELZEILE_BLAU = 0;         
+    public static final int ZIELZEILE_ROT  = ANZAHL - 1;
 
     /** Eine Wandposition: Ausrichtung + Knoten. */
     public static class Position
