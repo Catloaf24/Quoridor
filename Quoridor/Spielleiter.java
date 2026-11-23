@@ -1,13 +1,13 @@
-class Spielleiter
+/*class Spielleiter
 {
     public static FeldData[][] spielFeld = new FeldData[9][9];
 
-    static Spieler spieler1;
-    static Spieler spieler2;
+    static NewSpieler spieler1;
+    static NewSpieler spieler2;
 
     GUI gui;
 
-    private Spieler currentPlayer = spieler1;
+    private NewSpieler currentPlayer = spieler1;
 
     public Spielleiter()
     {
@@ -15,12 +15,12 @@ class Spielleiter
             for (int Col = 0; Col < 9; ++Col)
                 spielFeld[Row][Col] = new FeldData();
 
-        spieler1 = new Spieler(new Direction(1, 2, 3, 4));
-        spieler2 = new Spieler(new Direction(2, 1, 4, 3));
+        spieler1 = new NewSpieler(new Direction(1, 2, 3, 4));
+        spieler2 = new NewSpieler(new Direction(2, 1, 4, 3));
 
         gui = new GUI();
         gui.steuerungB.setAktiv(true);
-        gui.steuerungR.setAktiv(false);
+        gui.steuerungR.setAktiv(true);
     }
 
     static boolean CanMoveTo(Vec2 pos, int dir)
@@ -47,7 +47,7 @@ class Spielleiter
         if (!CanMoveTo(currentPlayer.pos, dir)) return;
     }
 
-    public boolean CheckWin(Spieler player) {
+    public boolean CheckWin(NewSpieler player) {
         if (player.pos.y == player.winRow) 
             return true;
         else 
@@ -58,3 +58,4 @@ class Spielleiter
         
     }
 }
+    */

@@ -34,23 +34,27 @@ public class Spieler
         return orientation.right;
     }
 
+    /*
     private boolean IsValidPosition(Vec2 p) 
     {
-        return p.x >= 0 && p.x < Spielleiter.spielFeld.length && p.y >= 0 && 
-               p.y < Spielleiter.spielFeld[0].length;
+        return p.x >= 0 && p.x < NewSpielleiter.spielFeld.length && p.y >= 0 && 
+               p.y < NewSpielleiter.spielFeld[0].length;
     }
+               */
     
+    /*
     public void MoveTo(int dir)
     {
         Vec2 delta = GetDirectionVector(dir);
         if (delta == null) return;
 
         Vec2 targetPos = new Vec2(pos.x + delta.x, pos.y + delta.y);
-        if (Spielleiter.CanMoveTo(targetPos, dir)) 
+        if (NewSpielleiter.CanMoveTo(targetPos, dir)) 
         {
             pos = targetPos;
         }
     }
+
 
     Vec2 validFelder(Vec2 f1, Vec2 f2) {
         //oben benachbart
@@ -59,7 +63,7 @@ public class Spieler
         }
         //unten benachbart
         if (f1.x == f2.y + 1) {
-            return new Vec2(orientation.down, orientation.down);
+            return new Vec2(orientation.down, orientation.up);
         }
         //links benachbart
         if (f1.y == f2.y - 1) {
@@ -73,12 +77,14 @@ public class Spieler
         return new Vec2(0, 0);
     }
 
+    
     void setWall(Vec2 f1, Vec2 f2) {
         Vec2 valid = validFelder(f1, f2);
 
         if (valid.x == 0) return;
 
-        if (!Spielleiter.spielFeld[f1.x][f1.y].IsBlocked(valid.x)) {Spielleiter.spielFeld[f1.x][f1.y].BlockSide(valid.x);}
-        if (!Spielleiter.spielFeld[f2.x][f2.y].IsBlocked(valid.y)) {Spielleiter.spielFeld[f2.x][f2.y].BlockSide(valid.y);}
+        if (!NewSpielleiter.spielFeld[f1.x][f1.y].IsBlocked(valid.x)) {NewSpielleiter.spielFeld[f1.x][f1.y].BlockSide(valid.x);}
+        if (!NewSpielleiter.spielFeld[f2.x][f2.y].IsBlocked(valid.y)) {NewSpielleiter.spielFeld[f2.x][f2.y].BlockSide(valid.y);}
     }
+        */
 }
