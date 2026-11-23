@@ -123,11 +123,15 @@ public class SteuerungB
             if (neuY < FELD_Y || neuY > FELD_Y + (ANZAHL - 1) * ZELLE) return;
         }
 
-        spielerBlue.setLocation(neuX, neuY);
+        
+        if (sl.movePlayer(s1, new Vec2(neuX, neuY))) {
+            sl.endTurn(s1);
+            spielerBlue.setLocation(neuX, neuY);
+        }
+        else {
+            System.out.println("Invalid move by player " + s1.side);
+        }
 
-        movePlayer(NewSpieler player, Vec2 nPos);
-        steuerungB.setAktiv(false);
-        steuerungR.setAktiv(true)
         // PLATZHALTER 3: Spiellogik über den Zug informieren (z. B. Position speichern, Spieler wechseln)
         // deineSpiellogik.zugGemacht(spielerBlue, dx, dy);
     }
