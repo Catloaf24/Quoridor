@@ -59,8 +59,8 @@ public class NewSpielleiter {
 		player.amtWalls--;
 	}
 
-	public int endTurn(NewSpieler player) {
-		return 1;
+	public void endTurn(NewSpieler player) {
+		player.done = true;
 	}
 
 	public boolean checkWin(NewSpieler s1, NewSpieler s2) {
