@@ -1,6 +1,6 @@
 class Spielleiter
 {
-    public static FeldData[][] spielFeld;
+    public static FeldData[][] spielFeld = new FeldData[9][9];
 
     static Spieler spieler1;
     static Spieler spieler2;
