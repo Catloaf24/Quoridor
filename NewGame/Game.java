@@ -7,7 +7,7 @@ public class Game {
 
 	static NewSpielleiter sl = new NewSpielleiter();
 
-	NewSpieler currentPlayer = s1;
+	static NewSpieler currentPlayer;
 
 	public static void main(String[] args) {
 		/*
@@ -39,5 +39,18 @@ public class Game {
 		GUI gui = new GUI();
 		gui.steuerungR.setSL(sl);
 		gui.steuerungB.setSL(sl);
+
+		currentPlayer = s1;
+
+		while(sl.checkWin(s1, s2) == false) {
+			if (currentPlayer == s1) {
+				gui.steuerungR.setAktiv(true);
+				gui.steuerungB.setAktiv(false);
+			}
+			else {
+				gui.steuerungR.setAktiv(false);
+				gui.steuerungB.setAktiv(true);
+			}
+		}
 	}
 }

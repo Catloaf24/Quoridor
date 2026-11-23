@@ -58,4 +58,22 @@ public class NewSpielleiter {
 
 		player.amtWalls--;
 	}
+
+	public int endTurn(NewSpieler player) {
+		return 1;
+	}
+
+	public boolean checkWin(NewSpieler s1, NewSpieler s2) {
+		if (s1.pos.y == 8) {
+			System.out.println("Player 1 wins!");
+			return true;
+		}
+		else if (s2.pos.y == 0) {
+			System.out.println("Player 2 wins!");
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
