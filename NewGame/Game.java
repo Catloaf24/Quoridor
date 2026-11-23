@@ -39,16 +39,22 @@ public class Game {
 		GUI gui = new GUI();
 		gui.steuerungR.setSL(sl);
 		gui.steuerungB.setSL(sl);
+		gui.steuerungR.setSpieler(s2);
+		gui.steuerungB.setSpieler(s1);
 
 		currentPlayer = s1;
 
 		while(sl.checkWin(s1, s2) == false) {
-			if (currentPlayer == s1) {
+			if (currentPlayer.done == true && currentPlayer == s1) {
 				gui.steuerungR.setAktiv(true);
+				s1.done = false;
+				currentPlayer = s2;
 				gui.steuerungB.setAktiv(false);
 			}
 			else {
 				gui.steuerungR.setAktiv(false);
+				s2.done = false;
+				currentPlayer = s1;
 				gui.steuerungB.setAktiv(true);
 			}
 		}

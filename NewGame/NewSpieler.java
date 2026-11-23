@@ -1,6 +1,7 @@
 public class NewSpieler {
 	int side = 0;
 	int amtWalls = 10;
+	boolean done = false;
 
 	Vec2 pos;
 
