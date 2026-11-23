@@ -162,6 +162,7 @@ public class GUI
         y = index % 9;
         System.out.println(x);
         System.out.println(y);
+        return new Cords(x, y);
     }
 
     public static void cordsToFeld(int x, int y)
@@ -169,6 +170,21 @@ public class GUI
         int index;
         index = y * 9 + x;
         System.out.println(index);
+    }
+
+    public static void pixelToFeld(int x, int y)
+    {
+        int spalte = (x - 252) / 64;
+        int zeile = (y - 252) / 64;
+    }
+
+    public static void FeldToPixel(int index)
+    {
+        int Zeile = index / 9;
+        int Spalte = index % 9;
+
+        int x = 252 + Spalte * 64;
+        int y = 252 + Zeile * 64;
     }
 
     public void placeWall()
