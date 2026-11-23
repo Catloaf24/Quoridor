@@ -40,7 +40,7 @@ public class NewSpielleiter {
 	}
 	
 	public boolean movePlayer(NewSpieler player, Vec2 nPos) {
-		if (validateMove(player.pos, nPos) == true) {
+		if (validateMove(player.pos, nPos) == true && player.isDone() == false) {
 			player.pos = nPos;
 			System.out.println("Player " + player.side + " moved to: " + nPos.x + ", " + nPos.y);
 			return true;
@@ -71,7 +71,9 @@ public class NewSpielleiter {
 	}
 
 	public void endTurn(NewSpieler player) {
-		player.done = true;
+		player.setDone(true);
+		System.out.println("Player " + player.side + " has ended their turn.");
+		System.out.println(player.isDone());
 	}
 
 	public boolean checkWin(NewSpieler s1, NewSpieler s2) {

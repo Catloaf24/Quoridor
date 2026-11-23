@@ -24,7 +24,7 @@ public class SteuerungB
     private boolean aktiv = true;
 
     NewSpielleiter sl;
-    NewSpieler s1;
+    NewSpieler thisPlayer;
 
     // Verhindert, dass gedrückt halten mehrere Felder auf einmal läuft
     private final Set<Integer> gedrueckt = new HashSet<>();
@@ -52,8 +52,15 @@ public class SteuerungB
         this.sl = sl;
     }
 
-    public void setSpieler(NewSpieler s1) {
-        this.s1 = s1;
+    public void setSpieler(NewSpieler s2) {
+        this.thisPlayer = s2;
+    }
+
+    public Vec2 pixelToFeld(Vec2 pixel)
+    {
+        int spalte = (pixel.x - 252) / 64;
+        int zeile = (pixel.y - 252) / 64;
+        return new Vec2(spalte, zeile);
     }
 
     //Schaltet die Steuerung ein oder aus
@@ -83,7 +90,7 @@ public class SteuerungB
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (!aktiv) return;
+                if (thisPlayer.isDone() == true) return;
                 if (gedrueckt.add(keyCode))
                 {
                     bewege(dx, dy);
@@ -124,15 +131,13 @@ public class SteuerungB
         }
 
         
-        if (sl.movePlayer(s1, new Vec2(neuX, neuY))) {
-            sl.endTurn(s1);
+        if (sl.movePlayer(thisPlayer, pixelToFeld(new Vec2(neuX, neuY))) && thisPlayer.isDone() == false) {
+            sl.endTurn(thisPlayer);
+            thisPlayer.setDone(true);
             spielerBlue.setLocation(neuX, neuY);
         }
         else {
-            System.out.println("Invalid move by player " + s1.side);
+            System.out.println("Invalid move by player " + thisPlayer.side);
         }
-
-        // PLATZHALTER 3: Spiellogik über den Zug informieren (z. B. Position speichern, Spieler wechseln)
-        // deineSpiellogik.zugGemacht(spielerBlue, dx, dy);
     }
 }

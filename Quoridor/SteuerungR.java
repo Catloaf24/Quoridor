@@ -26,7 +26,7 @@ public class SteuerungR
     private boolean aktiv = true;
 
     NewSpielleiter sl;
-    NewSpieler s2;
+    NewSpieler thisPlayer;
 
     // Verhindert, dass gedrückt halten mehrere Felder auf einmal läuft
     private final Set<Integer> gedrueckt = new HashSet<>();
@@ -55,7 +55,14 @@ public class SteuerungR
     }
 
     public void setSpieler(NewSpieler s1) {
-        this.s2 = s2;
+        this.thisPlayer = s1;
+    }
+
+    public Vec2 pixelToFeld(Vec2 pixel)
+    {
+        int spalte = (pixel.x - 252) / 64;
+        int zeile = (pixel.y - 252) / 64;
+        return new Vec2(spalte, zeile);
     }
 
     //Schaltet die Steuerung ein oder aus
@@ -85,7 +92,7 @@ public class SteuerungR
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (!aktiv) return;
+                if (thisPlayer.isDone() == true) return;
                 if (gedrueckt.add(keyCode))
                 {
                     bewege(dx, dy);
@@ -125,13 +132,13 @@ public class SteuerungR
             if (neuY < FELD_Y || neuY > FELD_Y + (ANZAHL - 1) * ZELLE) return;
         }
 
-        
-        if (sl.movePlayer(s2, new Vec2(neuX, neuY))) {
-            sl.endTurn(s2);
+        if (sl.movePlayer(thisPlayer, pixelToFeld(new Vec2(neuX, neuY))) && thisPlayer.isDone() == false) {
+            sl.endTurn(thisPlayer);
+            thisPlayer.setDone(true);
             spielerRed.setLocation(neuX, neuY);
         }
         else {
-            System.out.println("Invalid move by player " + s2.side);
+            System.out.println("Invalid move by player " + thisPlayer.side);
         }
 
         

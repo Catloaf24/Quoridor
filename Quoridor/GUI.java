@@ -146,6 +146,7 @@ public class GUI
     
     //---------------------------------------------------------------------------------------------------------
 
+    /*
     //Main Methods
     public static void main(String[] args)
     {
@@ -153,6 +154,7 @@ public class GUI
         feldToCords(17);
         cordsToFeld(8, 1);
     }
+        */
     
     public static void feldToCords(int index)
     {
@@ -171,12 +173,6 @@ public class GUI
         System.out.println(index);
     }
 
-    public static void pixelToFeld(int x, int y)
-    {
-        int spalte = (x - 252) / 64;
-        int zeile = (y - 252) / 64;
-    }
-
     public static void FeldToPixel(int index)
     {
         int Zeile = index / 9;
@@ -185,11 +181,4 @@ public class GUI
         int x = 252 + Spalte * 64;
         int y = 252 + Zeile * 64;
     }
-
-    public void placeWall()
-    {
-        
-    }
-
 }
-//brd geht das jetzt?

@@ -37,25 +37,30 @@ public class Game {
 		*/
 
 		GUI gui = new GUI();
+		GUI.feldToCords(17);
+        GUI.cordsToFeld(8, 1);
 		gui.steuerungR.setSL(sl);
 		gui.steuerungB.setSL(sl);
-		gui.steuerungR.setSpieler(s2);
-		gui.steuerungB.setSpieler(s1);
+		gui.steuerungR.setSpieler(s1);
+		gui.steuerungB.setSpieler(s2);
 
 		currentPlayer = s1;
+		gui.steuerungR.setAktiv(false);
 
 		while(sl.checkWin(s1, s2) == false) {
-			if (currentPlayer.done == true && currentPlayer == s1) {
-				gui.steuerungR.setAktiv(true);
-				s1.done = false;
+			if (currentPlayer.isDone() == false && currentPlayer == s1) {
+				s1.setDone(false);
 				currentPlayer = s2;
-				gui.steuerungB.setAktiv(false);
-			}
-			else {
+				currentPlayer.setDone(false);
 				gui.steuerungR.setAktiv(false);
-				s2.done = false;
-				currentPlayer = s1;
 				gui.steuerungB.setAktiv(true);
+			}
+			else if (currentPlayer.isDone() == false && currentPlayer == s2) {
+				s2.setDone(false);
+				currentPlayer = s1;
+				currentPlayer.setDone(false);
+				gui.steuerungR.setAktiv(true);
+				gui.steuerungB.setAktiv(false);
 			}
 		}
 	}
