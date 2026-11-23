@@ -120,9 +120,10 @@ public class SteuerungR
             if (neuY < FELD_Y || neuY > FELD_Y + (ANZAHL - 1) * ZELLE) return;
         }
 
-        // PLATZHALTER 2: Regelprüfung deiner Spiellogik (z. B. Wände)
-        // if (!deineSpiellogik.darfZiehen(spielerRed, dx, dy)) return;
-
+        movePlayer(NewSpieler player, Vec2 nPos);
+        steuerungR.setAktiv(false);
+        steuerungB.setAktiv(true);
+    
         spielerRed.setLocation(neuX, neuY);
 
         // PLATZHALTER 3: Spiellogik über den Zug informieren (z. B. Position speichern, Spieler wechseln)
