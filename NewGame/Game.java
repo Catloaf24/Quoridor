@@ -9,7 +9,7 @@ public class Game {
 
 	static NewSpieler currentPlayer;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		/*
 		System.out.println(s1.pos.x + " " + s1.pos.y);
 		System.out.println(s2.pos.x + " " + s2.pos.y);
@@ -46,24 +46,28 @@ public class Game {
 
 		currentPlayer = s1;
 		gui.steuerungR.setAktiv(true);
+		gui.steuerungB.setAktiv(false);
 
 		while(sl.checkWin(s1, s2) == false) {
 			if (currentPlayer.isDone() == true) {
 				if (currentPlayer == s1) {
 					s2.setDone(false);
-					gui.steuerungR.setAktiv(false);
-					gui.steuerungB.setAktiv(true);
+					gui.steuerungR.setAktiv(true);
+					gui.steuerungB.setAktiv(false);
 					currentPlayer = s2;
 					currentPlayer.setDone(false);
 				}
 				else {
 					s1.setDone(false);
-					gui.steuerungB.setAktiv(false);
-					gui.steuerungR.setAktiv(true);
+					gui.steuerungB.setAktiv(true);
+					gui.steuerungR.setAktiv(false);
 					currentPlayer = s1;
 					currentPlayer.setDone(false);
 				}
 			}
+			//System.out.println("Current player: " + currentPlayer.side);
+			//System.out.println();
+			Thread.sleep(100);
 		}
 	}
 }
