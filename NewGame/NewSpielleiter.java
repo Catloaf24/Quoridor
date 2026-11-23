@@ -13,6 +13,9 @@ public class NewSpielleiter {
 	}
 
 	int getDirection(Vec2 cPos, Vec2 nPos) {
+		System.out.println("Current Position: " + cPos.x + ", " + cPos.y);
+		System.out.println("New Position: " + nPos.x + ", " + nPos.y);
+
 		if (cPos.x == nPos.x && cPos.y == nPos.y + 1) return 1; // up
 		if (cPos.x == nPos.x && cPos.y == nPos.y - 1) return 2; // down
 		if (cPos.x == nPos.x + 1 && cPos.y == nPos.y) return 3; // left
@@ -24,6 +27,11 @@ public class NewSpielleiter {
 	public boolean validateMove(Vec2 cPos, Vec2 nPos) {
 		int dir = getDirection(cPos, nPos);
 
+		if (dir == -1) {
+			System.out.println("Invalid move! (not adjacent)");
+			return false;
+		}
+
 		if (feld[cPos.x][cPos.y].blocked(dir - 1) == 1) 
 			return false;
 		else
@@ -31,12 +39,15 @@ public class NewSpielleiter {
 			return true;
 	}
 	
-	public void movePlayer(NewSpieler player, Vec2 nPos) {
+	public boolean movePlayer(NewSpieler player, Vec2 nPos) {
 		if (validateMove(player.pos, nPos) == true) {
 			player.pos = nPos;
+			System.out.println("Player " + player.side + " moved to: " + nPos.x + ", " + nPos.y);
+			return true;
 		}
 		else {
 			System.out.println("Invalid move by player " + player.side);
+			return false;
 		}
 	}
 
