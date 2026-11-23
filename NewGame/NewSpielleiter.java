@@ -10,9 +10,6 @@ public class NewSpielleiter {
 				feld[i][j] = new NewFeldData();
 			}
 		}
-		
-		//s1 = new NewSpieler(1);
-		//s2 = new NewSpieler(2);
 	}
 
 	int getDirection(Vec2 cPos, Vec2 nPos) {
@@ -41,20 +38,23 @@ public class NewSpielleiter {
 		else {
 			System.out.println("Invalid move by player " + player.side);
 		}
-		
 	}
 
-	public void placeWall(NewSpieler player, Vec2 f1, Vec2 f2) {
-		if (getDirection(f1, f2) == -1) {
+	public void placeWall(NewSpieler player, Vec2 f1, Vec2 f2, Vec2 f3, Vec2 f4) {
+		if (getDirection(f1, f2) == -1 || getDirection(f3, f4) == -1) {
 			System.out.println("Invalid wall placement! (Wrong dir)");
 			return;
 		}
-		if (feld[f1.x][f1.y].blocked(getDirection(f1, f2) - 1) == 1) {
+
+		if (feld[f1.x][f1.y].blocked(getDirection(f1, f2) - 1) == 1 || feld[f3.x][f3.y].blocked(getDirection(f3, f4) - 1) == 1){
 			System.out.println("Invalid wall placement! (wall already exists)");
 			return;
 		}
+
 		feld[f1.x][f1.y].block(getDirection(f1, f2) - 1);
 		feld[f2.x][f2.y].block(getDirection(f2, f1) - 1);
+		feld[f3.x][f3.y].block(getDirection(f3, f4) - 1);
+		feld[f4.x][f4.y].block(getDirection(f4, f3) - 1);
 
 		player.amtWalls--;
 	}
