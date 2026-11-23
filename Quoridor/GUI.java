@@ -162,7 +162,6 @@ public class GUI
         y = index % 9;
         System.out.println(x);
         System.out.println(y);
-        return new Cords(x, y);
     }
 
     public static void cordsToFeld(int x, int y)
