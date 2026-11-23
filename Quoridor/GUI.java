@@ -68,12 +68,39 @@ public class GUI
         spielerBlue.setPreferredSize(new Dimension(64,64));
         spielerBlue.setBounds(508, 764, 64, 64);
         
-        //Walls
-        JPanel wallPanelB = new WallPanel("Textures\\WallB.png");
+        //WallPanels
+        //Red
+        JPanel wallPanelB = new JPanel();
         wallPanelB.setOpaque(false);
-        wallPanelB.setPreferredSize(new Dimension(7, 128));
-        wallPanelB.setBounds(492, 65, 7, 128);
-        //Wall Tetxtur als rotated adden für B und R 
+        wallPanelB.setLayout(null);
+        wallPanelB.setBounds(389, 0, 313, 1080); //389 Start, Offset 34#
+
+        WallPanelB[] walls = new WallPanelB[10];
+
+        for (int i = 0; i < 10; i++) {
+            walls[i] = new WallPanelB("Textures\\WallBVert.png");
+            walls[i].setOpaque(false);
+            walls[i].setBackground(Color.RED);
+            walls[i].setBounds(i * 34, 65, 7, 128);
+            wallPanelB.add(walls[i]);
+        }
+
+        //Blue
+        JPanel wallPanelR = new JPanel();
+        wallPanelR.setOpaque(false);
+        wallPanelR.setLayout(null);
+        wallPanelR.setBounds(0, 830, 1080, 313); //389 Start, Offset 34#
+
+        WallPanelR[] walls1 = new WallPanelR[10];
+
+        for (int j = 0; j < 10; j++) {
+            walls1[j] = new WallPanelR("Textures\\WallRVert.png");
+            walls1[j].setOpaque(false);
+            walls1[j].setBackground(Color.RED);
+            walls1[j].setBounds(377 + j * 34, 65, 7, 128);
+            wallPanelR.add(walls1[j]);
+        }
+
         //-----------------------------------------------------------------------------------------------------
 
         //Hintergrund
@@ -95,6 +122,7 @@ public class GUI
         layers.add(spielerRed, Integer.valueOf(2));
         layers.add(spielerBlue, Integer.valueOf(2));
         layers.add(wallPanelB, Integer.valueOf(3));
+        layers.add(wallPanelR, Integer.valueOf(3));
         
         //Steuerungen erzeugen
         steuerungR steuerungR = new steuerungR(layers, spielerRed, spielerBlue);
