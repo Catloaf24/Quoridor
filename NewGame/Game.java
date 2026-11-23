@@ -45,22 +45,24 @@ public class Game {
 		gui.steuerungB.setSpieler(s2);
 
 		currentPlayer = s1;
-		gui.steuerungR.setAktiv(false);
+		gui.steuerungR.setAktiv(true);
 
 		while(sl.checkWin(s1, s2) == false) {
-			if (currentPlayer.isDone() == false && currentPlayer == s1) {
-				s1.setDone(false);
-				currentPlayer = s2;
-				currentPlayer.setDone(false);
-				gui.steuerungR.setAktiv(false);
-				gui.steuerungB.setAktiv(true);
-			}
-			else if (currentPlayer.isDone() == false && currentPlayer == s2) {
-				s2.setDone(false);
-				currentPlayer = s1;
-				currentPlayer.setDone(false);
-				gui.steuerungR.setAktiv(true);
-				gui.steuerungB.setAktiv(false);
+			if (currentPlayer.isDone() == true) {
+				if (currentPlayer == s1) {
+					s2.setDone(false);
+					gui.steuerungR.setAktiv(false);
+					gui.steuerungB.setAktiv(true);
+					currentPlayer = s2;
+					currentPlayer.setDone(false);
+				}
+				else {
+					s1.setDone(false);
+					gui.steuerungB.setAktiv(false);
+					gui.steuerungR.setAktiv(true);
+					currentPlayer = s1;
+					currentPlayer.setDone(false);
+				}
 			}
 		}
 	}

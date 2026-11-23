@@ -90,7 +90,7 @@ public class SteuerungB
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (thisPlayer.isDone() == true) return;
+                if (!aktiv) return;
                 if (gedrueckt.add(keyCode))
                 {
                     bewege(dx, dy);

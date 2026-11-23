@@ -10,8 +10,8 @@ public class NewSpieler {
 		this.pos = (side == 1) ? new Vec2(4, 0) : new Vec2(4, 8);
 	}
 
-	public void setDone(boolean done) {
-		this.done = done;
+	public void setDone(boolean d) {
+		this.done = d;
 	}
 
 	public boolean isDone() {
