@@ -51,12 +51,15 @@ public class WandSteuerungR
     private boolean aktiv = true;
     private boolean wandModus = false;      // true = Spieler ist gerade am Wand setzen
     private final Set<Integer> gedrueckt = new HashSet<>();   // Verhindert, dass gedrückt halten ständig umschaltet
-    private int uebrigeWaende;
+    //private int uebrigeWaende;
 
     private WandBrett.Position vorschau = null;     // null = keine Vorschau
     private boolean vorschauGueltig = false;
 
     private Runnable platziertListener = null;
+
+    private NewSpielleiter sl;
+    private NewSpieler thisPlayer;
 
     /**
      * @param layers      das JLayeredPane aus der GUI
@@ -73,7 +76,7 @@ public class WandSteuerungR
         this.spielerBlue = spielerBlue;
         this.brett = brett;
         this.vorrat = vorrat;
-        this.uebrigeWaende = (vorrat != null) ? vorrat.length : 10;
+        this.thisPlayer.amtWalls = (vorrat != null) ? vorrat.length : 10;
 
         bildHor = new ImageIcon(TEXTUR_HOR).getImage();
         bildVert = new ImageIcon(TEXTUR_VERT).getImage();
@@ -107,6 +110,7 @@ public class WandSteuerungR
             public void mousePressed(MouseEvent e)
             {
                 if (e.getButton() != MouseEvent.BUTTON1) return;
+                if (thisPlayer.isDone()) return;
                 aktualisiereVorschau(e.getX(), e.getY());
                 platziereVorschau();
             }
@@ -121,6 +125,14 @@ public class WandSteuerungR
         {
             belegeTaste(im, am, taste);
         }
+    }
+
+    public void setSpielleiter(NewSpielleiter sl) {
+        this.sl = sl;
+    }
+
+    public void setSpieler(NewSpieler spieler) {
+        this.thisPlayer = spieler;
     }
 
     private void belegeTaste(InputMap im, ActionMap am, int keyCode)
@@ -205,13 +217,14 @@ public class WandSteuerungR
     // Wie viele Wände hat Rot noch?
     public int getUebrigeWaende()
     {
-        return uebrigeWaende;
+        return thisPlayer.amtWalls;
     }
 
     // Wird nach jeder erfolgreich gesetzten Wand aufgerufen (z. B. um den Spieler zu wechseln)
     public void setPlatziertListener(Runnable listener)
     {
         this.platziertListener = listener;
+        thisPlayer.setDone(true);
     }
 
     // ------------------------------------------------------------------
@@ -247,7 +260,7 @@ public class WandSteuerungR
 
     private boolean darfPlatzieren(WandBrett.Position p)
     {
-        if (uebrigeWaende <= 0) return false;
+        if (thisPlayer.amtWalls <= 0) return false;
 
         return brett.darfPlatzieren(p,
                 spalte(spielerBlue), zeile(spielerBlue),
@@ -256,18 +269,18 @@ public class WandSteuerungR
 
     private void platziereVorschau()
     {
-        if (!aktiv || !wandModus || vorschau == null || !vorschauGueltig) return;
+        if (thisPlayer.isDone() == true || !wandModus || vorschau == null || !vorschauGueltig) return;
 
         WandBrett.Position p = vorschau;
         Rectangle r = WandBrett.grenzen(p);
 
         brett.setze(p);
-        uebrigeWaende--;
+        thisPlayer.amtWalls--;
 
         // Eine Wand aus dem Vorrat entfernen
-        if (vorrat != null && uebrigeWaende >= 0 && uebrigeWaende < vorrat.length)
+        if (vorrat != null && thisPlayer.amtWalls >= 0 && thisPlayer.amtWalls < vorrat.length)
         {
-            vorrat[uebrigeWaende].setVisible(false);
+            vorrat[thisPlayer.amtWalls].setVisible(false);
         }
 
         // Die feste Wand ins Spielfeld setzen
@@ -300,6 +313,9 @@ public class WandSteuerungR
         // ist aktualisiert und die Vorschau gelöscht.
         // Die Felder stehen in f1, f2, f3, f4 und die Wand selbst in "p" bereit.
         // ==================================================================
+
+        sl.endTurn(thisPlayer);
+        thisPlayer.setDone(true);
 
         if (platziertListener != null)
         {
