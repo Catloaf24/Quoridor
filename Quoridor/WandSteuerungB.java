@@ -314,8 +314,7 @@ public class WandSteuerungB
         // Die Felder stehen in f1, f2, f3, f4 und die Wand selbst in "p" bereit.
         // ==================================================================
 
-        if (p.horizontal == true) {sl.placeWall(thisPlayer, f1, f3, f2, f4);}
-        else {sl.placeWall(thisPlayer, f1, f2, f3, f4);}
+        sl.placeWall(thisPlayer, f1, f2, f3, f4);
         sl.endTurn(thisPlayer);
         thisPlayer.setDone(true);
 
