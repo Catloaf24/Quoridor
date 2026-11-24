@@ -281,6 +281,26 @@ public class WandSteuerungB
         vorschauGueltig = false;
         neuZeichnen(r);
 
+        // --- Die 4 Felder (Spalte/Zeile), zwischen denen die Wand steht ---
+        Vec2 f1 = new Vec2(p.a,     p.b);       // links oben
+        Vec2 f2 = new Vec2(p.a + 1, p.b);       // rechts oben
+        Vec2 f3 = new Vec2(p.a,     p.b + 1);   // links unten
+        Vec2 f4 = new Vec2(p.a + 1, p.b + 1);   // rechts unten
+
+        System.out.println("Wand gesetzt (" + (p.horizontal ? "horizontal" : "vertikal") + "), Felder:");
+        System.out.println("  f1 = (" + (int) f1.x + ", " + (int) f1.y + ")");
+        System.out.println("  f2 = (" + (int) f2.x + ", " + (int) f2.y + ")");
+        System.out.println("  f3 = (" + (int) f3.x + ", " + (int) f3.y + ")");
+        System.out.println("  f4 = (" + (int) f4.x + ", " + (int) f4.y + ")");
+
+        // ==================================================================
+        // HIER EINBAUEN: alles, was nach dem Platzieren einer Wand passieren soll,
+        // z. B. die Methode zum Beenden des Zugs / Spielerwechsel.
+        // Die Wand ist an dieser Stelle schon gesetzt (brett.setze), der Vorrat
+        // ist aktualisiert und die Vorschau gelöscht.
+        // Die Felder stehen in f1, f2, f3, f4 und die Wand selbst in "p" bereit.
+        // ==================================================================
+
         if (platziertListener != null)
         {
             platziertListener.run();

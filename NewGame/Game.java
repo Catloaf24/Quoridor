@@ -36,9 +36,7 @@ public class Game {
 		
 		*/
 
-		GUI gui = new GUI();
-		GUI.feldToCords(17);
-        GUI.cordsToFeld(8, 1);
+		GUI gui = new GUI();		System.out.println("Game Ready!");
 		gui.steuerungR.setSL(sl);
 		gui.steuerungB.setSL(sl);
 		gui.steuerungR.setSpieler(s1);
