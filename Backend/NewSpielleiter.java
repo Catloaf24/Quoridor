@@ -65,7 +65,7 @@ public class NewSpielleiter {
 	}
 
 	//Leon
-	public void placeWall(NewSpieler player, Vec2 f1, Vec2 f2, Vec2 f3, Vec2 f4) {
+	public void placeWall(NewSpieler player, Vec2 f1, Vec2 f2, Vec2 f3, Vec2 f4, boolean isHorizontal) {
 		if (getDirection(f1, f2) == -1 || getDirection(f3, f4) == -1) {
 			System.out.println("Invalid wall placement! (Wrong dir)");
 			return;
@@ -76,10 +76,18 @@ public class NewSpielleiter {
 			return;
 		}
 
-		feld[f1.x][f1.y].block(getDirection(f1, f2) - 1);
-		feld[f2.x][f2.y].block(getDirection(f2, f1) - 1);
-		feld[f3.x][f3.y].block(getDirection(f3, f4) - 1);
-		feld[f4.x][f4.y].block(getDirection(f4, f3) - 1);
+		if (!isHorizontal) {		
+			feld[f1.x][f1.y].block(getDirection(f1, f2) - 1);
+			feld[f2.x][f2.y].block(getDirection(f2, f1) - 1);
+			feld[f3.x][f3.y].block(getDirection(f3, f4) - 1);
+			feld[f4.x][f4.y].block(getDirection(f4, f3) - 1);
+		}
+		else {
+			feld[f1.x][f1.y].block(getDirection(f1, f3) - 1);
+			feld[f2.x][f2.y].block(getDirection(f3, f1) - 1);
+			feld[f3.x][f3.y].block(getDirection(f2, f4) - 1);
+			feld[f4.x][f4.y].block(getDirection(f4, f2) - 1);
+		}
 
 		player.amtWalls--;
 	}
