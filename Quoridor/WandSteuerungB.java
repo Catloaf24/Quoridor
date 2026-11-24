@@ -76,7 +76,7 @@ public class WandSteuerungB
         this.spielerBlue = spielerBlue;
         this.brett = brett;
         this.vorrat = vorrat;
-        this.thisPlayer.amtWalls = (vorrat != null) ? vorrat.length : 10;
+        
 
         bildHor = new ImageIcon(TEXTUR_HOR).getImage();
         bildVert = new ImageIcon(TEXTUR_VERT).getImage();
@@ -125,6 +125,15 @@ public class WandSteuerungB
         {
             belegeTaste(im, am, taste);
         }
+    }
+
+     public void setSL(NewSpielleiter sl) {
+        this.sl = sl;
+    }
+
+    public void setSpieler(NewSpieler spieler) {
+        this.thisPlayer = spieler;
+        thisPlayer.amtWalls = (vorrat != null) ? vorrat.length : 10;
     }
 
     private void belegeTaste(InputMap im, ActionMap am, int keyCode)
