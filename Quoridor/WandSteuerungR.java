@@ -147,7 +147,7 @@ public class WandSteuerungR
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (!aktiv) return;
+                if (thisPlayer.isDone() == true) return;
                 if (gedrueckt.add(keyCode))
                 {
                     toggleWandModus();
@@ -181,7 +181,7 @@ public class WandSteuerungR
     // Wand-Modus ein/aus (an = Vorschau folgt der Maus, Klick setzt die Wand)
     public void setWandModus(boolean an)
     {
-        if (an && !aktiv) return;
+        if (an && thisPlayer.isDone() == true) return;
         wandModus = an;
         if (!an)
         {
@@ -232,7 +232,7 @@ public class WandSteuerungR
 
     private void aktualisiereVorschau(int mausX, int mausY)
     {
-        if (!aktiv || !wandModus)
+        if (thisPlayer.isDone() == true || !wandModus)
         {
             loescheVorschau();
             return;
@@ -383,6 +383,6 @@ public class WandSteuerungR
     public void actionPerformed(ActionEvent e)
     {
         System.out.println("E gedrückt, aktiv=" + aktiv + ", gedrueckt=" + gedrueckt);
-        if (!aktiv) return;
+        if (thisPlayer.isDone() == true) return;
     }
 }

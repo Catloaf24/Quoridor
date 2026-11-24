@@ -147,7 +147,7 @@ public class WandSteuerungB
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (!aktiv) return;
+                if (thisPlayer.isDone() == true) return;
                 if (gedrueckt.add(keyCode))
                 {
                     toggleWandModus();
@@ -181,7 +181,7 @@ public class WandSteuerungB
     // Wand-Modus ein/aus (an = Vorschau folgt der Maus, Klick setzt die Wand)
     public void setWandModus(boolean an)
     {
-        if (an && !aktiv) return;
+        if (an && thisPlayer.isDone() == true) return;
         wandModus = an;
         if (!an)
         {
@@ -231,7 +231,7 @@ public class WandSteuerungB
 
     private void aktualisiereVorschau(int mausX, int mausY)
     {
-        if (!aktiv || !wandModus)
+        if (thisPlayer.isDone() == true || !wandModus)
         {
             loescheVorschau();
             return;
@@ -269,7 +269,7 @@ public class WandSteuerungB
 
     private void platziereVorschau()
     {
-        if (!aktiv || !wandModus || vorschau == null || !vorschauGueltig) return;
+        if (thisPlayer.isDone() == true || !wandModus || vorschau == null || !vorschauGueltig) return;
 
         WandBrett.Position p = vorschau;
         Rectangle r = WandBrett.grenzen(p);
