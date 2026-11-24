@@ -20,6 +20,10 @@ public class NewSpielleiter {
 		if (cPos.x == nPos.x && cPos.y == nPos.y - 1) return 2; // down
 		if (cPos.x == nPos.x + 1 && cPos.y == nPos.y) return 3; // left
 		if (cPos.x == nPos.x - 1 && cPos.y == nPos.y) return 4; // right
+		if (cPos.x == nPos.x && cPos.y == nPos.y + 2) return 1; // jump up
+		if (cPos.x == nPos.x && cPos.y == nPos.y - 2) return 2; // jump down
+		if (cPos.x == nPos.x + 2 && cPos.y == nPos.y) return 3; // jump left
+		if (cPos.x == nPos.x - 2 && cPos.y == nPos.y) return 4; // jump right
 
 		return -1;
 	}
@@ -32,11 +36,20 @@ public class NewSpielleiter {
 			return false;
 		}
 
-		if (feld[cPos.x][cPos.y].blocked(dir - 1) == 1) 
+		if (feld[cPos.x][cPos.y].blocked(dir - 1) == 1) {
+			System.out.println("Invalid move! (blocked)");
 			return false;
-		else
+		}
+		/*
+		if (feld[nPos.x][nPos.y].blocked((dir % 4) - 1) == 1) {
+			System.out.println("Invalid move! (blocked)");
+			return false;
+		}
+		*/
+		else {
 			System.out.println("Valid move!");
 			return true;
+		}
 	}
 	
 	public boolean movePlayer(NewSpieler player, Vec2 nPos) {
