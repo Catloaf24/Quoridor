@@ -9,6 +9,7 @@ public class NewSpielleiter {
 		}
 	}
 
+	//Leon
 	int getDirection(Vec2 cPos, Vec2 nPos) {
 		System.out.println("Current Position: " + cPos.x + ", " + cPos.y);
 		System.out.println("New Position: " + nPos.x + ", " + nPos.y);
@@ -25,6 +26,7 @@ public class NewSpielleiter {
 		return -1;
 	}
 
+	//Philipp
 	public boolean validateMove(Vec2 cPos, Vec2 nPos) {
 		int dir = getDirection(cPos, nPos);
 
@@ -49,6 +51,7 @@ public class NewSpielleiter {
 		}
 	}
 	
+	//Philipp
 	public boolean movePlayer(NewSpieler player, Vec2 nPos) {
 		if (validateMove(player.pos, nPos) == true && player.isDone() == false) {
 			player.pos = nPos;
@@ -61,6 +64,7 @@ public class NewSpielleiter {
 		}
 	}
 
+	//Leon
 	public void placeWall(NewSpieler player, Vec2 f1, Vec2 f2, Vec2 f3, Vec2 f4) {
 		if (getDirection(f1, f2) == -1 || getDirection(f3, f4) == -1) {
 			System.out.println("Invalid wall placement! (Wrong dir)");
@@ -80,12 +84,14 @@ public class NewSpielleiter {
 		player.amtWalls--;
 	}
 
+	//Leon
 	public void endTurn(NewSpieler player) {
 		player.setDone(true);
 		System.out.println("Player " + player.side + " has ended their turn.");
 		System.out.println(player.isDone());
 	}
 
+	//Philipp
 	public boolean checkWin(NewSpieler s1, NewSpieler s2) {
 		if (s1.pos.y == 8) {
 			System.out.println("Player 1 wins!");

@@ -1,3 +1,4 @@
+//Philipp
 public class NewSpieler {
 	int side = 0;
 	int amtWalls = 20;

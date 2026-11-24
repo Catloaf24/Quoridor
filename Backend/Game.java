@@ -1,5 +1,6 @@
 public class Game {
 
+	//Philipp
 	static NewSpieler s1 = new NewSpieler(1);
 	static NewSpieler s2 = new NewSpieler(2);
 
@@ -7,6 +8,7 @@ public class Game {
 
 	static NewSpieler currentPlayer;
 
+	//~50/50 split Philipp/Leon
 	public static void main(String[] args) throws InterruptedException {
 		GUI gui = new GUI();
 		gui.steuerungR.setSL(sl);
@@ -45,8 +47,7 @@ public class Game {
 					currentPlayer.setDone(false);
 				}
 			}
-			//System.out.println("Current player: " + currentPlayer.side);
-			//System.out.println();
+			// Waruuuuuum muss man hier pausen, damit die GUI nicht freezed???? Ich hasse Java.
 			Thread.sleep(100);
 		}
 	}

@@ -1,3 +1,4 @@
+//Leon
 public class NewFeldData {
 	int blocked[] = new int[4];
 	
