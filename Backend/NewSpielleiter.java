@@ -39,12 +39,6 @@ public class NewSpielleiter {
 			System.out.println("Invalid move! (blocked)");
 			return false;
 		}
-		/*
-		if (feld[nPos.x][nPos.y].blocked((dir % 4) - 1) == 1) {
-			System.out.println("Invalid move! (blocked)");
-			return false;
-		}
-		*/
 		else {
 			System.out.println("Valid move!");
 			return true;
