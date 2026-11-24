@@ -64,12 +64,12 @@ public class GUI
         JPanel spielerRed = new SpielerPanel("Textures\\\\Quoridor_Player_R.png");
         spielerRed.setOpaque(false);
         spielerRed.setPreferredSize(new Dimension(64,64));
-        spielerRed.setBounds(508, 764, 64, 64); //variablen für movement die dann angepasst werden von movement Methode/Klasse, Aktualisierung mit .reprint
+        spielerRed.setBounds(508, 252, 64, 64); //variablen für movement die dann angepasst werden von movement Methode/Klasse, Aktualisierung mit .reprint
         
         JPanel spielerBlue = new SpielerPanel("Textures\\Quoridor_Player_B.png");
         spielerBlue.setOpaque(false);
         spielerBlue.setPreferredSize(new Dimension(64,64));
-        spielerBlue.setBounds(508, 252, 64, 64);
+        spielerBlue.setBounds(508, 764, 64, 64);
         
         //WallPanels
         //Red
