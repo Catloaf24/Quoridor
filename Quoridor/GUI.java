@@ -61,12 +61,12 @@ public class GUI
         //-----------------------------------------------------------------------------------------------------
 
         //SpielerPanel
-        JPanel spielerRed = new SpielerPanel("Textures\\\\Quoridor_Player_R.png");
+        JPanel spielerRed = new SpielerPanel("Textures\\\\Quoridor_Player_B.png"); //"falsche" Textur ist absicht
         spielerRed.setOpaque(false);
         spielerRed.setPreferredSize(new Dimension(64,64));
         spielerRed.setBounds(508, 252, 64, 64); //variablen für movement die dann angepasst werden von movement Methode/Klasse, Aktualisierung mit .reprint
         
-        JPanel spielerBlue = new SpielerPanel("Textures\\Quoridor_Player_B.png");
+        JPanel spielerBlue = new SpielerPanel("Textures\\Quoridor_Player_R.png"); //"falsche" Textur ist absicht
         spielerBlue.setOpaque(false);
         spielerBlue.setPreferredSize(new Dimension(64,64));
         spielerBlue.setBounds(508, 764, 64, 64);
