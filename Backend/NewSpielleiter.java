@@ -1,9 +1,6 @@
 public class NewSpielleiter {
 	NewFeldData[][] feld = new NewFeldData[9][9];
 
-	//NewSpieler s1;
-	//NewSpieler s2;
-
 	public NewSpielleiter() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {

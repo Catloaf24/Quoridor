@@ -133,7 +133,7 @@ public class WandSteuerungR
 
     public void setSpieler(NewSpieler spieler) {
         this.thisPlayer = spieler;
-        thisPlayer.amtWalls = (vorrat != null) ? vorrat.length : 10;
+        thisPlayer.amtWalls = 10;
     }
 
     private void belegeTaste(InputMap im, ActionMap am, int keyCode)
@@ -276,7 +276,6 @@ public class WandSteuerungR
         Rectangle r = WandBrett.grenzen(p);
 
         brett.setze(p);
-        thisPlayer.amtWalls--;
 
         // Eine Wand aus dem Vorrat entfernen
         if (vorrat != null && thisPlayer.amtWalls >= 0 && thisPlayer.amtWalls < vorrat.length)

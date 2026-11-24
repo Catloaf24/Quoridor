@@ -21,11 +21,11 @@ public class Game {
 		currentPlayer = s1;
 		gui.steuerungR.setAktiv(true);
 		gui.steuerungB.setAktiv(false);
-		//gui.wandR.setAktiv(true);
-		//gui.wandB.setAktiv(false);
+		gui.wandR.setAktiv(true);
+		gui.wandB.setAktiv(false);
 
 		while(sl.checkWin(s1, s2) == false) {
-			if (currentPlayer.isDone() == true) {
+			if (currentPlayer.isDone() == true && sl.checkWin(s1, s2) == false) {
 				if (currentPlayer == s1) {
 					s2.setDone(false);
 					gui.steuerungR.setAktiv(true);
