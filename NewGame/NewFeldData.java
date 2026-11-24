@@ -8,10 +8,4 @@ public class NewFeldData {
 	public void block(int dir) {
 		blocked[dir] = 1;
 	}
-
-	/*
-	public NewFeldData() {
-
-	}
-	*/
 }
