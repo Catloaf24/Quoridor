@@ -1,6 +1,7 @@
 public class Game {
 
 	//Philipp
+	//erstellt 2 neue Spieler, einen SL und ein objekt für den derzeitigen Spieler
 	static NewSpieler s1 = new NewSpieler(1);
 	static NewSpieler s2 = new NewSpieler(2);
 
@@ -9,7 +10,9 @@ public class Game {
 	static NewSpieler currentPlayer;
 
 	//~50/50 split Philipp/Leon
+	//Die tatsächliche hauptmethode
 	public static void main(String[] args) throws InterruptedException {
+		//weise den steuerungen spieler und den sl zu, damit sie auf Methoden zugreifen können 
 		GUI gui = new GUI();
 		gui.steuerungR.setSL(sl);
 		gui.steuerungB.setSL(sl);
@@ -20,15 +23,20 @@ public class Game {
 		gui.wandR.setSpieler(s1);
 		gui.wandB.setSpieler(s2);
 
+		//setzt den aktiven Spieler auf s1 und aktiviert/deaktiviert die passende Steuerungen
 		currentPlayer = s1;
 		gui.steuerungR.setAktiv(true);
 		gui.steuerungB.setAktiv(false);
 		gui.wandR.setAktiv(true);
 		gui.wandB.setAktiv(false);
 
+		//solange keiner der Spieler gewonnen hat...
 		while(sl.checkWin(s1, s2) == false) {
+			//falls der aktive Spieler fertig ist und nicht gewonnen hat, überspringe alles
 			if (currentPlayer.isDone() == true && sl.checkWin(s1, s2) == false) {
+				//falls der aktive Spieler nicht fertig ist, nicht gewonnen hat und s1 ist:
 				if (currentPlayer == s1) {
+					//s2.done zurücksetzen, steuerungen aktivieren/deaktivieren und am ende s2 zum aktiven Spieler machen
 					s2.setDone(false);
 					gui.steuerungR.setAktiv(true);
 					gui.wandR.setAktiv(true);
@@ -37,7 +45,9 @@ public class Game {
 					currentPlayer = s2;
 					currentPlayer.setDone(false);
 				}
+				//andernfalls war s2 der aktive Spieler:
 				else {
+					//s1.done zurücksetzen, steuerungen aktivieren/deaktivieren und am ende s1 zum aktiven Spieler machen
 					s1.setDone(false);
 					gui.steuerungB.setAktiv(true);
 					gui.wandB.setAktiv(true);
@@ -47,7 +57,7 @@ public class Game {
 					currentPlayer.setDone(false);
 				}
 			}
-			// Waruuuuuum muss man hier pausen, damit die GUI nicht freezed???? Ich hasse Java.
+			// Waruuuuuum muss man hier pausen, damit die GUI nicht freezed????
 			Thread.sleep(100);
 		}
 	}
